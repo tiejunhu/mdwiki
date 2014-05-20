@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script src="lib/jquery/jquery-1.11.0.min.js"></script>
+  <script src="lib/jqueryui/jquery-ui-1.10.4.custom-core-widget.min.js"></script>
+  <script src="lib/tocify/jquery.tocify.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="lib/codemirror/lib/codemirror.js"></script>
+  <script src="lib/codemirror/mode/markdown/markdown.js"></script>
+  <script src="lib/marked/marked.js"></script>
+  <script src="src/main.js"></script>
+  <script src="src/page_history.js"></script>
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="lib/bootstrap/css/custom.css" rel="stylesheet">
+  <link href="lib/codemirror/lib/codemirror.css" rel="stylesheet">
+  <link href="lib/marked/github.css" rel="stylesheet">
+  <link href="lib/tocify/jquery.tocify.css" rel="stylesheet">
+  <title>Markdown Wiki</title>
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#" onclick="on_wiki_link_click('wiki:start'); return false;">Markdown Wiki</a>
+      </div>
+      <button type="button" class="btn btn-default navbar-btn" id="editread">Edit</button>
+      <button type="button" class="btn btn-default navbar-btn active" id="livepreview">Live Preview</button>
+      <button type="button" class="btn btn-default navbar-btn" id="insertimage">Insert Image</button>
+      <form class="navbar-form navbar-right" role="search" id="searchform">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="full text search" id="searchtext">
+        </div>
+        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+      </form>
+    </div>
+  </nav>
+  <div class="container-fluid" id="breadcrumb">
+    <div class="row">
+      <ol class="breadcrumb" id="page_history_div">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Library</a></li>
+        <li class="active">Data</li>
+      </ol>
+    </div>
+  </div>
+  <div class="container-fluid" id="content">
+    <div class="row" id="editor_row">
+      <div class="col-md-6 col-xs-6" id="editor_div">
+        <textarea rows="10" id="editor"></textarea>
+      </div>
+      <div class="col-md-6 col-xs-6" id="live_preview_div">
+      </div>
+    </div>
+    <div class="row" id="preview_row">
+      <div class="col-md-3 col-xs-3" id="toc_div"><div id="toc"></div></div>
+      <div class="col-md-9 col-xs-9" id="preview_div"></div>
+    </div>
+  </div>
+  <input style="display:none;" id="fileDialog" type="file" />
+  <script language="JavaScript">
+  var ngui = require('nw.gui');
+  var nwin = ngui.Window.get();
+  nwin.maximize();
+  nwin.show();
+
+  $(document).ready(function() {
+    EditCtx = {
+      'cm': init_cm_editor($("#editor")[0]),
+      'editor': $("#editor_row"),
+      'preview': $("#preview_row"),
+      'preview_content': $("#preview_div"),
+      'livepreview': $("#live_preview_div"),
+      'mode': 'read',
+      'editreadbtn': $("#editread"),
+      'ph': new PageHistory($("#page_history_div"))
+    };
+    
+    load_start_page();
+    change_to_read_mode();
+    install_edit_read_handler();
+    install_live_preview_handler();
+    install_insert_image_handler();
+    install_search_handler();
+  });
+  </script>
+</body>
+</html>

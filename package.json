@@ -1,0 +1,12 @@
+{
+  "name": "Markdown Wiki",
+  "main": "index.html",
+  "window": {
+    "title": "Markdown Wiki",
+    "width": 1000,
+    "min_width": 768,
+    "toolbar": true,
+    "position": "center",
+    "show": false
+  }
+}

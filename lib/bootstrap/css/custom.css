@@ -1,0 +1,50 @@
+#content {
+  padding-top: 100px;
+  height: 100%;
+}
+
+#breadcrumb {
+  padding-top: 51px;
+  z-index: 1020;
+  position: fixed;
+  width: 100%;
+}
+
+#preview_row {
+  height: 100%;  
+  overflow: auto;
+}
+
+#editor_row {
+  height: 100%;  
+}
+
+#editor_div {
+  /*border-style:solid;*/
+  height: 100%;  
+  overflow: auto;  
+}
+
+#live_preview_div {
+  /*border-style:solid;  */
+  height: 100%;  
+  overflow: auto;  
+}
+
+a.nopage, a.nopage:hover, a.nopage:active, a.nopage:focus a.nopage:link, a.nopage:visited {
+  color: #ba0000;
+  border-bottom: 1px dashed;
+}
+
+a.nopage:hover {
+  text-decoration: none;
+}
+
+blockquote {
+  font-size: 14px;
+}
+
+html, body {
+    overflow:hidden;
+    height: 100%;
+}
